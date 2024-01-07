@@ -29,7 +29,7 @@ const Sidebar: React.FC<Sideprops> = ({ children, songs }) => {
       {
         icon: GrSpotify,
         label: "Spotify",
-        href: "/",
+        href: "",
         active: pathname === "/",
       },
       {
