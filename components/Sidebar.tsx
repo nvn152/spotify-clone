@@ -15,6 +15,8 @@ import Box from "./Box";
 import SidebarItem from "./SidebarItem";
 import Library from "./Library";
 import { Song } from "@/types";
+import usePlayer from "@/hooks/usePlayer";
+import { twMerge } from "tailwind-merge";
 
 interface Sideprops {
   children: React.ReactNode;
@@ -24,12 +26,14 @@ interface Sideprops {
 const Sidebar: React.FC<Sideprops> = ({ children, songs }) => {
   const pathname = usePathname();
 
+  const player = usePlayer();
+
   const routes = useMemo(
     () => [
       {
         icon: GrSpotify,
         label: "Spotify",
-        href: "",
+        href: "/",
         active: pathname === "/",
       },
       {
@@ -49,7 +53,12 @@ const Sidebar: React.FC<Sideprops> = ({ children, songs }) => {
   );
 
   return (
-    <div className="flex  h-full">
+    <div
+      className={twMerge(
+        "flex h-full",
+        player.activeId && "h-[calc(100%-80px)]"
+      )}
+    >
       <div className="hidden md:flex flex-col gap-y-2 bg-black h-full w-[300px] p-2">
         <Box>
           <div className="flex flex-col gap-y-4 px-5 py-4">
